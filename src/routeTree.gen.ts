@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArtisanRouteImport } from './routes/artisan'
+import { Route as CollectorRouteImport } from './routes/collector'
+import { Route as GalleryRouteImport } from './routes/gallery'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArtisanRoute = ArtisanRouteImport.update({
+  id: '/artisan',
+  path: '/artisan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectorRoute = CollectorRouteImport.update({
+  id: '/collector',
+  path: '/collector',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/artisan': typeof ArtisanRoute
+  '/collector': typeof CollectorRoute
+  '/gallery': typeof GalleryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/artisan': typeof ArtisanRoute
+  '/collector': typeof CollectorRoute
+  '/gallery': typeof GalleryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/artisan': typeof ArtisanRoute
+  '/collector': typeof CollectorRoute
+  '/gallery': typeof GalleryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/artisan' | '/collector' | '/gallery'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/artisan' | '/collector' | '/gallery'
+  id: '__root__' | '/' | '/artisan' | '/collector' | '/gallery'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArtisanRoute: typeof ArtisanRoute
+  CollectorRoute: typeof CollectorRoute
+  GalleryRoute: typeof GalleryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/artisan': {
+      id: '/artisan'
+      path: '/artisan'
+      fullPath: '/artisan'
+      preLoaderRoute: typeof ArtisanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collector': {
+      id: '/collector'
+      path: '/collector'
+      fullPath: '/collector'
+      preLoaderRoute: typeof CollectorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArtisanRoute: ArtisanRoute,
+  CollectorRoute: CollectorRoute,
+  GalleryRoute: GalleryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
