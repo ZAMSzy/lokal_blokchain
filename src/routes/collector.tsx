@@ -14,7 +14,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { WalletNotice } from "@/components/WalletNotice";
-import { VerificationNotFound } from "@/components/VerificationResult";
 import { useWayang } from "@/components/WayangProvider";
 import { RECORD_IMAGES, DEMO_ROLES, type WayangRecord } from "@/lib/wayangStore";
 import { truncateAddress } from "@/lib/web3Service";
