@@ -31,7 +31,7 @@ export function WalletNotice({ portal }: { portal: string }) {
             <Wallet className="h-4 w-4" />
             {walletsDetected.solana ? "Hubungkan Phantom Solana" : "Coba Phantom (fallback demo)"}
           </Button>
-          <Button variant="secondary" onClick={() => connectDemo("collector")}>
+          <Button variant="secondary" onClick={() => connectDemo("solana")}>
             Langsung pakai Dompet Demo
           </Button>
         </div>

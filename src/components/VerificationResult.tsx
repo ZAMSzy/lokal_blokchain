@@ -140,7 +140,7 @@ export function VerificationResult({ record }: { record: WayangRecord }) {
                   Wallet Pengrajin
                 </p>
                 <p className="mt-0.5 font-mono text-foreground">
-                  {truncateAddress(record.provenance[0].actor)}
+                  {truncateAddress(record.provenance[0]?.actor ?? "")}
                 </p>
               </div>
               <div className="min-w-0">

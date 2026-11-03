@@ -43,7 +43,7 @@ export const Route = createFileRoute("/collector")({
 function CollectorDashboard() {
   const { session, myRecords, registry, transfer } = useWayang();
   const [transferTarget, setTransferTarget] = useState<WayangRecord | null>(null);
-  const [newOwner, setNewOwner] = useState(DEMO_ROLES.collector.address);
+  const [newOwner, setNewOwner] = useState<string>(DEMO_ROLES.collector.address);
   const [submitting, setSubmitting] = useState(false);
 
   if (!session) {
