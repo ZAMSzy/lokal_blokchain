@@ -182,11 +182,27 @@ function CollectorDashboard() {
                 placeholder="7X9z… atau 0x7a2…"
               />
             </div>
+            <Button
+              className="w-full gap-2 glow-gold"
+              disabled={!newOwner.trim() || !isLikelyAddress(newOwner) || submitting}
+              onClick={handleTransfer}
+            >
+              {submitting ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" /> Menunggu tanda tangan Phantom…
+                </>
+              ) : (
+                <>
+                  <KeyRound className="h-4 w-4" /> Exec Transfer (Sign via Phantom)
+                </>
+              )}
+            </Button>
             {newOwner.trim() && !isLikelyAddress(newOwner) && (
               <p className="rounded-lg border border-destructive/40 bg-destructive/10 p-2.5 text-xs">
                 Alamat wallet tidak valid — gunakan alamat Solana (base58) atau EVM (0x…).
               </p>
             )}
+
 
           </div>
         </DialogContent>
