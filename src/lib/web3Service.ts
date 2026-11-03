@@ -75,9 +75,10 @@ export async function connectPhantomEvm(): Promise<WalletSession> {
   const accounts = (await provider.request({
     method: "eth_requestAccounts",
   })) as string[];
-  if (!accounts?.length) throw new Error("NO_ACCOUNTS");
+  const account = accounts?.[0];
+  if (!account) throw new Error("NO_ACCOUNTS");
   return {
-    address: accounts[0],
+    address: account,
     provider: "evm",
     network: "Devnet",
     simulated: false,

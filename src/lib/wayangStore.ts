@@ -260,6 +260,14 @@ export async function applyMint(
   fileCid?: string,
 ): Promise<WayangRecord> {
   await simulatePhantomSignature();
+  const genesisStep: ProvenanceStep = {
+    kind: "genesis",
+    title: "Genesis Block — Dicetak Pengrajin",
+    detail: `${input.tokoh} didaftarkan ke blockchain oleh ${input.pengrajin}`,
+    actor: session.address,
+    txHash: "",
+    timestamp: new Date().toISOString(),
+  };
   const record: WayangRecord = {
     id: `WC-${(input.asal || "SOLO").slice(0, 3).toUpperCase()}-${String(Math.floor(Math.random() * 9000) + 1000)}`,
     tokoh: input.tokoh,
@@ -276,18 +284,9 @@ export async function applyMint(
     currentOwner: session.address,
     status: "Genesis — Terdaftar Pengrajin",
     lokasi: `Workshop pengrajin, ${input.asal}`,
-    provenance: [
-      {
-        kind: "genesis",
-        title: "Genesis Block — Dicetak Pengrajin",
-        detail: `${input.tokoh} didaftarkan ke blockchain oleh ${input.pengrajin}`,
-        actor: session.address,
-        txHash: "",
-        timestamp: new Date().toISOString(),
-      },
-    ],
+    provenance: [genesisStep],
   };
-  record.provenance[0].txHash = record.genesisTx;
+  genesisStep.txHash = record.genesisTx;
   registry = [record, ...getRegistryOnce()];
   persist();
   return record;

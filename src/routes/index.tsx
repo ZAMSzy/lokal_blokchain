@@ -62,6 +62,10 @@ function PublicVerifier() {
     // Mock camera: after a short "focus", resolve a seeded certificate.
     setTimeout(() => {
       const target = registry[Math.floor(Math.random() * registry.length)];
+      if (!target) {
+        setScanning(false);
+        return;
+      }
       setScanning(false);
       setQuery(target.id);
       runSearch(target.id);

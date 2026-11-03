@@ -63,9 +63,10 @@ function ArtisanPortal() {
   const set = (key: keyof typeof form) => (value: string) =>
     setForm((f) => ({ ...f, [key]: value }));
 
-  const handleUpload = (files: FileList | null) => {
-    if (!files?.length) return;
-    const name = files[0].name;
+  const handleUpload = (fileList: FileList | null) => {
+    const file = fileList?.[0];
+    if (!file) return;
+    const name = file.name;
     setUploadName(name);
     // Simulated IPFS pinning of the photo + physical wooden certificate.
     setFileCid(`ipfs://${generateIpfsCid()}`);
